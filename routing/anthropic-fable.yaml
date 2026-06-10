@@ -1,0 +1,104 @@
+# Routing Matrix: anthropic-fable
+#
+# Anthropic-only routing on Fable 5. All roles use claude-fable-* except
+# "fast", which stays on claude-haiku-* for cheap bulk/utility work.
+#
+# Uses class-scoped globs (claude-fable-*, claude-haiku-*) so new releases
+# are picked up automatically — the resolver's version-aware sort with
+# date-suffix stripping selects the highest clean version.
+#
+# Based on the bundled "anthropic" matrix (amplifier-bundle-routing-matrix),
+# created 2026-06-10 to route to Fable 5.
+
+name: anthropic-fable
+description: "Anthropic-only routing on Fable 5 (haiku retained for fast role)."
+updated: "2026-06-10"
+
+roles:
+  general:
+    description: "Versatile catch-all, no specialization needed"
+    candidates:
+      - provider: anthropic
+        model: claude-fable-*
+
+  fast:
+    description: "Quick utility tasks — parsing, classification, file ops, bulk work"
+    candidates:
+      - provider: anthropic
+        model: claude-haiku-*
+
+  coding:
+    description: "Code generation, implementation, debugging"
+    candidates:
+      - provider: anthropic
+        model: claude-fable-*
+
+  ui-coding:
+    description: "Frontend/UI code — components, layouts, styling, spatial reasoning"
+    candidates:
+      - provider: anthropic
+        model: claude-fable-*
+
+  security-audit:
+    description: "Vulnerability assessment, attack surface analysis, code auditing"
+    candidates:
+      - provider: anthropic
+        model: claude-fable-*
+        config:
+          reasoning_effort: high
+
+  reasoning:
+    description: "Deep architectural reasoning, system design, complex multi-step analysis"
+    candidates:
+      - provider: anthropic
+        model: claude-fable-*
+        config:
+          reasoning_effort: high
+
+  critique:
+    description: "Analytical evaluation — finding flaws in existing work, not generating solutions"
+    candidates:
+      - provider: anthropic
+        model: claude-fable-*
+        config:
+          reasoning_effort: xhigh
+
+  creative:
+    description: "Design direction, aesthetic judgment, high-quality creative output"
+    candidates:
+      - provider: anthropic
+        model: claude-fable-*
+
+  writing:
+    description: "Long-form content — documentation, marketing, case studies, storytelling"
+    candidates:
+      - provider: anthropic
+        model: claude-fable-*
+
+  research:
+    description: "Deep investigation, information synthesis across multiple sources"
+    candidates:
+      - provider: anthropic
+        model: claude-fable-*
+        config:
+          reasoning_effort: high
+
+  vision:
+    description: "Understanding visual input — screenshots, diagrams, UI mockups"
+    candidates:
+      - provider: anthropic
+        model: claude-fable-*
+
+  image-gen:
+    # Anthropic has no native image generation API. Falls back to the best
+    # creative model for image planning, prompt crafting, and SVG/ASCII art.
+    description: "Image generation (limited — no native Anthropic image API)"
+    candidates:
+      - provider: anthropic
+        model: claude-fable-*
+
+  critical-ops:
+    description: "High-reliability operational tasks — infrastructure, orchestration, coordination"
+    candidates:
+      - provider: anthropic
+        model: claude-fable-*
